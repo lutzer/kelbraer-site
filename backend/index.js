@@ -14,16 +14,47 @@ const storage = multer.diskStorage({
 },
   filename: function (req, file, cb) {
    let type = file.originalname.split('.')[1]
-   
    cb(null, `${file.fieldname}-${uuidv4()}.${type}`)
 }
+
 })
+
 
 const upload = multer(
   {
-   storage: storage
+   storage: storage,
+
+   fileFilter: (_req, file, cb) => {
+     console.log("I am fiile", file.mimetype)
+     if(file.mimetype == "image/png" || file.mimetype == "image/jpg" ||  file.mimetype == "image/jpeg") {
+      cb(null, true);
+     }
+     else {
+      cb(null, false);
+      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+    
+     }
+   }
+  })
+
+
+/*function checkFileType(file, cb){
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if(mimetype && extname){
+    return cb(null,true);
+  } else {
+    cb('Error: Images Only!');
   }
-)
+} */
+
+
+
 
 const router = new Router({
   prefix: '/api'
