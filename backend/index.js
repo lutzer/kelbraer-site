@@ -3,58 +3,33 @@ const Router = require('koa-router');
 const koaBody = require('koa-body');
 const multer = require('@koa/multer')
 const path = require('path');
-const { compileFunction } = require('vm');
+const { v4 : uuidv4 } = require('uuid');
+const { convertImage } = require('./utils')
+
 const app = new Koa();
-const { v4: uuidv4 } = require('uuid');
 
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, '/imgData'))
-},
+  },
   filename: function (req, file, cb) {
-   let type = file.originalname.split('.')[1]
-   cb(null, `${file.fieldname}-${uuidv4()}.${type}`)
-}
-
+    let type = file.originalname.split('.')[1]
+    cb(null, `${file.fieldname}-${uuidv4()}.${type}`)
+  }
 })
 
 
-const upload = multer(
-  {
-   storage: storage,
-
-   fileFilter: (_req, file, cb) => {
-     console.log("I am fiile", file.mimetype)
-     if(file.mimetype == "image/png" || file.mimetype == "image/jpg" ||  file.mimetype == "image/jpeg") {
+const upload = multer({
+  storage: storage,
+  fileFilter: (_req, file, cb) => {
+    if(file.mimetype == "image/png" || file.mimetype == "image/jpg" ||  file.mimetype == "image/jpeg") {
       cb(null, true);
-     }
-     else {
+    } else {
       cb(null, false);
-      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-    
-     }
-   }
-  })
-
-
-/*function checkFileType(file, cb){
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if(mimetype && extname){
-    return cb(null,true);
-  } else {
-    cb('Error: Images Only!');
+    }
   }
-} */
-
-
-
+})
 
 const router = new Router({
   prefix: '/api'
@@ -77,11 +52,12 @@ router.post('/send/text', (ctx) => {
 router.post('/send/img',
   upload.single("image"),
  ctx => {
-  console.log('ctx.request.file', ctx.request.file);
-  console.log('ctx.file', ctx.file);
-  console.log('ctx.request.body', ctx.request.body);
-  ctx.body = 'done';  
- 
+  if (!ctx.file) {
+    ctx.throw('Error uploading file', 400)
+  } else {
+    convertImage(ctx.file.path, null, 384)
+    ctx.body = 'File uploaded.'
+  }
 })
 
 router.get('/submissions', (ctx) => {

@@ -3,7 +3,7 @@ const fs = require('fs')
 var sizeOf = require('image-size');
 const { expect } = require('chai');
 
-describe.only('Util function tests', () => {
+describe('Util function tests', () => {
 
   it('resizeImage() should resize the small side of an image', async () => {
     const filePath = __dirname + '/files/copy.jpg'

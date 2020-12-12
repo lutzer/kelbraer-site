@@ -31,6 +31,12 @@ describe('Api Route Tests', () => {
     expect(result.statusCode).to.equal(400)
   }) 
 
+  it('POST /api/send should return 400 if pdf sent', async () => {
+    let result = await chai.request('http://localhost:3000').post('/api/send/img')
+      .attach('image', fs.readFileSync(__dirname + '/files/doc.pdf'), 'doc.pdf')
+    expect(result.statusCode).to.equal(400)
+  }) 
+
   //SUBMISSIONS
   it('GET /api/submissions should return empty array with no data', async () => {
     let result = await chai.request('http://localhost:3000').get('/api/submissions')
