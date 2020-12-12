@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     :root {
@@ -12,13 +12,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-size: var(--s0);
     font-family: Open-Sans, Helvetica, Sans-Serif;
+    overflow: scroll;
   }
 `;
 
-const Wrapper = styled.section`
-  background: red;
-  height: 200px;
-  width: 500px;
-`;
 
 export default GlobalStyle;
