@@ -40,7 +40,9 @@ const GlobalStyle = createGlobalStyle`
         --beige: #FFF5DC;
         --white: #fff;
         
+        --text: var(--black);
         --bg: var(--beige);
+        --colorPrimary: var(--red);
   }
 
   body {
@@ -52,10 +54,12 @@ const GlobalStyle = createGlobalStyle`
     overflow: scroll;
     background-color: var(--bg);
     line-height: 1.5;
+    color: var(--text);
   }
 
   h1 {
     font-size: var(--s3);
+    line-height: 1.2;
   }
 `;
 

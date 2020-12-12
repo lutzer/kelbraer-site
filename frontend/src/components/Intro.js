@@ -4,9 +4,8 @@ import {motion} from "framer-motion"
 function Intro() {
 
   const Container = styled.header`
-    height: 400px;
     background-color: #FFF5DC;
-    padding: 40px;
+    padding: 150px var(--contentPadding);
     text-align: center;
     overflow: hidden;
   `

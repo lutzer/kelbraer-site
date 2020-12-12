@@ -41,6 +41,7 @@ function Message() {
   const MessageContainer = styled.div`
     border: 1px solid #ddd;
     padding: 20px;
+    background-color: var(--white);
 
     textarea {
       width: 100%;
