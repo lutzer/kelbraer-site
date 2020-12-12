@@ -19,8 +19,15 @@ function Intro() {
 
   return (
     <Container>
-        <h1>Welcome to the website of Kelbraer people</h1>
-        <Cloud animate={{x: "120vw"}} transition={{ duration: 10 }}></Cloud>
+      <svg viewBox="0 0 500 100">
+        <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" fill="transparent"/>
+        <text width="500" text-anchor="middle" font-weight="bold">
+          <textPath xlinkHref="#curve" startOffset="50%">
+            Kelbraer website
+          </textPath>
+        </text>
+      </svg>
+      <Cloud animate={{x: "120vw"}} transition={{ duration: 10 }}></Cloud>
     </Container>
   );
 }
