@@ -63,7 +63,8 @@ router.post('/send/img', upload.single("image"), async (ctx) => {
     convertImage(ctx.file.path, null, 384)
       .catch((err) => console.error(err))
       .then(() => console.info(`image ${ctx.file.path} converted.`))
-    ctx.body = 'File uploaded.'
+    ctx.body = { file : ctx.file.filename}
+    
   }
 })
 

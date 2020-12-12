@@ -52,5 +52,14 @@ describe('Api Route Tests', () => {
     expect(_.last(result.body).text).to.equal(text)
   })
   
-  
+
+  //Imagetest
+  it('GET /images should return images', async () => {
+    let result = await chai.request('http://localhost:3000').post('/api/send/img')
+    .attach('image', fs.readFileSync(__dirname + '/files/image.jpg'), 'image.jpg')
+
+    result = await chai.request('http://localhost:3000').get('/images/' + result.body.file)
+    expect(result.statusCode).to.equal(200);  
+  })
+
 })
