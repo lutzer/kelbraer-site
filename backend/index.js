@@ -17,12 +17,13 @@ router.post('/send/text', (ctx) => {
   if (!data.text)
     ctx.throw('Request body must contain text field', 400)
   else {
+    console.log("hey what am I", data)
     submissions.push({ text: data.text })
     ctx.body = 'Submission received.'
   }
 })
 
-router.post('/send/image', (ctx) => {
+router.post('/send/img', (ctx) => {
   ctx.body = '/send'
 })
 
@@ -33,3 +34,6 @@ router.get('/submissions', (ctx) => {
 app.use(router.routes())
 
 app.listen(3000);
+
+
+

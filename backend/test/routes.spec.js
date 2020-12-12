@@ -2,11 +2,11 @@ const { expect } = require('chai')
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const _ = require('lodash')
-
+const fs = require('fs')
 chai.use(chaiHttp);
 
 describe('Api Route Tests', () => {
-
+  //SEND TEXT
   it('POST /api/send should receive text', async () => {
     let result = await chai.request('http://localhost:3000').post('/api/send/text')
       .send({ text : 'Hallo wie gehts?'})
@@ -19,6 +19,19 @@ describe('Api Route Tests', () => {
     expect(result.statusCode).to.equal(400)
   })
 
+   //UPLOAD IMAGES
+   it('POST /api/send should upload an image', async () => {
+     let result = await chai.request('http://localhost:3000').post('/api/send/img')
+       .attach('image', fs.readFileSync(__dirname + '/files/image.jpg'), 'image.jpg')
+      expect(result).to.have.status(200);  
+  })
+  
+  it('POST /api/send should upload an image', async () => {
+    let result = await chai.request('http://localhost:3000').post('/api/send/img')
+    expect(result.statusCode).to.equal(400)
+  })
+
+  //SUBMISSIONS
   it('GET /api/submissions should return empty array with no data', async () => {
     let result = await chai.request('http://localhost:3000').get('/api/submissions')
     expect(result.body).to.be.an('array')
