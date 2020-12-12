@@ -13,8 +13,6 @@ function Message() {
   const [sketchIsOpen, setSketchIsOpen] = useState(false);
   const handleSketchUpload = () => setSketchIsOpen(true);
   
-  // const clearSketch = () => setSketch("");
-
   const handleImageUpload = e => {
     //setImageUploaded(true);
     const [file] = e.target.files;

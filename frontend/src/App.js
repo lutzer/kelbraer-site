@@ -9,6 +9,8 @@ const MessageContainer = styled.main`
   grid-template-columns: repeat(12, 1fr);
   max-width: 900px;
   margin: auto;
+  padding-left: var(--contentPadding);
+  padding-right: var(--contentPadding);
 
   > div {
     grid-column: 1 / -1;
