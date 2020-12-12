@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     :root {
@@ -13,6 +13,12 @@ const GlobalStyle = createGlobalStyle`
     font-size: var(--s0);
     font-family: Open-Sans, Helvetica, Sans-Serif;
   }
+`;
+
+const Wrapper = styled.section`
+  background: red;
+  height: 200px;
+  width: 500px;
 `;
 
 export default GlobalStyle;
