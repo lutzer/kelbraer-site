@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
-import SketchPad from './components/SketchPad';
+// import SketchPad from './components/SketchPad';
 import Message from "./components/Message"
 import Intro from "./components/Intro"
 
@@ -23,7 +23,6 @@ function App() {
       <MessageContainer>
         <Message></Message>
       </MessageContainer>
-      <SketchPad />
     </div>
   );
 }

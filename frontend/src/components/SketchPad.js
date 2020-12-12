@@ -7,20 +7,16 @@ import styled, { createGlobalStyle } from 'styled-components';
 import "./SketchPad.css";
 
 
-export default function SketchPad() {
-    const [imageURL, setImageURL] = useState(null);
-    const [open, setOpen] = useState(false);
-
+export default function SketchPad(props) {
     // closing modal
-    const closeModal = () => setOpen(false);
+    const closeModal = () => props.setOpen(false);
 
     const sigCanvas = useRef({});
     
     // clear and save functions
     const clear = () => sigCanvas.current.clear();
-
     const save = () => 
-        setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")) & closeModal();
+        props.setSketch(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")) & closeModal();
 
     // styled components
     const Button = styled.button`
@@ -31,11 +27,9 @@ export default function SketchPad() {
 
     return (
         <div>
-            <h1>Sketchpad</h1>
-            <button type="button" onClick={()=> setOpen(o => !o)}>add sketch</button>
             <Popup 
                 modal 
-                open={open}
+                open={props.open}
                 closeOnDocumentClick onClose={closeModal}
             >
                 <SignaturePad 
@@ -49,20 +43,6 @@ export default function SketchPad() {
                 <button onClick={clear}>clear</button>
                 <button onClick={save}>save</button>
             </Popup>
-            <br/>
-            <br/>
-            {imageURL ? (
-                <img
-                    src={imageURL}
-                    alt="My doodle"
-                    style={{
-                        display: "block",
-                        margin: "0 auto",
-                        border: "1px solid black",
-                        width: "154px"
-                    }}
-                />
-            ):null}
         </div>
     );
 }
