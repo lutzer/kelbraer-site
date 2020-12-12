@@ -39,6 +39,8 @@ function Message() {
     textarea {
       width: 100%;
       height: 100px;
+      border: 0;
+      font-size: var(--s0);
     }
   `
 

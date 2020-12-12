@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Message from "./components/Message"
 import Intro from "./components/Intro"
+import GlobalStyle from "./GlobalStyle"
 
 const MessageContainer = styled.main`
   display: grid;
@@ -16,6 +17,7 @@ const MessageContainer = styled.main`
 function App() {
   return (
     <div className="App">
+      <GlobalStyle></GlobalStyle>
       <Intro></Intro>
       <MessageContainer>
         <Message></Message>
