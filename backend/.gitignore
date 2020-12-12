@@ -1,3 +1,5 @@
 node_modules
-imageData/*
-!imageData/.keep
+
+data/db.json
+data/images/*
+!data/images/.keep

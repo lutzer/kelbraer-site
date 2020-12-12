@@ -1,6 +1,7 @@
 const config = {
-  databaseFile: 'data/db.json',
-  imageFolder: __dirname + '/imgData/',
+  databaseFile: __dirname + '/data/db.json',
+  imageFolder: __dirname + '/data/images/',
+  imageRoute : '/images/',
   imageSize: 384
 }
 
