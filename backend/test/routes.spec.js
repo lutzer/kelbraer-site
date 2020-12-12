@@ -26,10 +26,10 @@ describe('Api Route Tests', () => {
       expect(result).to.have.status(200);  
   })
   
-  it('POST /api/send should upload an image', async () => {
+  it('POST /api/send should return 400 if no img sent', async () => {
     let result = await chai.request('http://localhost:3000').post('/api/send/img')
     expect(result.statusCode).to.equal(400)
-  })
+  }) 
 
   //SUBMISSIONS
   it('GET /api/submissions should return empty array with no data', async () => {
@@ -45,5 +45,6 @@ describe('Api Route Tests', () => {
     let result = await chai.request('http://localhost:3000').get('/api/submissions')
     expect(_.last(result.body).text).to.equal(text)
   })
-
+  
+  
 })
