@@ -38,20 +38,16 @@ export default function SketchPad() {
                 open={open}
                 closeOnDocumentClick onClose={closeModal}
             >
-                {close => (
-                    <>
-                        <SignaturePad 
-                            ref={sigCanvas}
-                            canvasProps={{
-                                width: 320, height: 400,
-                                className: 'sigCanvas'
-                            }}
-                        />
-                        <Button onClick={closeModal}>X</Button>
-                        <button onClick={clear}>clear</button>
-                        <button onClick={save}>save</button>
-                    </>
-                )}
+                <SignaturePad 
+                    ref={sigCanvas}
+                    canvasProps={{
+                        width: 320, height: 400,
+                        className: 'sigCanvas'
+                    }}
+                />
+                <Button onClick={closeModal}>X</Button>
+                <button onClick={clear}>clear</button>
+                <button onClick={save}>save</button>
             </Popup>
             <br/>
             <br/>
