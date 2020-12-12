@@ -1,11 +1,14 @@
 import styled from "styled-components"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 function Message() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
 
+  const [imageUploaded, setImageUploaded] = useState(true);
+
   const handleImageUpload = e => {
+    //setImageUploaded(true);
     const [file] = e.target.files;
     if (file) {
       const reader = new FileReader();
@@ -17,6 +20,17 @@ function Message() {
       reader.readAsDataURL(file);
     }
   };
+
+  const clearImageInput = e => {
+    imageUploader.current.value = ""
+    const {current} = uploadedImage;
+    current.src = "";
+    //setImageUploaded(false);
+  }
+
+  const handleSubmit = () => {
+    //TODO
+  }
 
   const MessageContainer = styled.div`
     max-width: 600px;
@@ -30,14 +44,28 @@ function Message() {
   `
 
   const PreviewImage = styled.div`
-    height: 60px;
-    width: 60px;
+    visibility: ${props => props.visible ? "visible" : "hidden"};
+    position: relative;
+    height: 100px;
+    width: 100px;
     border: 1px dashed black;
 
     img {
       width: 100%;
       height: 100%;
     }
+  `
+  const RemoveButton = styled.div`
+    height: 33px;
+    width: 33px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    border-radius: 99px;
+  `
+
+  const AddButton = styled.div`
+    border: 1px solid #ccc;
   `
 
   return (
@@ -54,15 +82,22 @@ function Message() {
             display: "none"
           }}
         />
-        <PreviewImage onClick={() => imageUploader.current.click()}>
+        <PreviewImage visible={imageUploaded}>
+          <RemoveButton onClick={clearImageInput}>
+          <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16.5" cy="16.5" r="16.5" fill="black"/>
+            <path d="M9 9L24 24M24 9L9 24" stroke="white" stroke-width="2"/>
+          </svg>
+          </RemoveButton>
           <img
             alt="preview"
             ref={uploadedImage}
           />
         </PreviewImage>
-        Click to upload Image
-      <button>Send message</button>
+        <AddButton>Add Sketch</AddButton>
+        <AddButton onClick={() => imageUploader.current.click()}>Add Image</AddButton>
     </MessageContainer>
+    <button onClick={handleSubmit}>Send message</button>
   </div>
   );
 }
