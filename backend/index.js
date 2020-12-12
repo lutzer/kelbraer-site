@@ -49,7 +49,7 @@ router.post('/send/text', async (ctx) => {
     ctx.throw('Request body must contain text field', 400)
   else {
     const db = await getDatabase()
-    db.get('submissions').push({ text: data.text }).write()
+    db.get('submissions').push({ text: data.text, createdAt: Date.now() }).write()
     ctx.body = 'Submission received.'
   }
 })
@@ -59,7 +59,7 @@ router.post('/send/img', upload.single("image"), async (ctx) => {
     ctx.throw('Error uploading file', 400)
   } else {
     const db = await getDatabase()
-    db.get('submissions').push({ image: ctx.file.filename }).write()
+    db.get('submissions').push({ image: ctx.file.filename, createdAt: Date.now() }).write()
     convertImage(ctx.file.path, null, 384)
       .catch((err) => console.error(err))
       .then(() => console.info(`image ${ctx.file.path} converted.`))
@@ -73,7 +73,7 @@ router.get('/submissions', async (ctx) => {
   const submissions = db.get('submissions').value()
   ctx.body = submissions.map( (entry) => {
     if (entry.image) {
-      entry.image = config.imageFolder + entry.image
+      entry.image = config.imageRoute + entry.image
     }
     return entry
   })
