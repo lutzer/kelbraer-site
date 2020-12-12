@@ -20,51 +20,50 @@ function Message() {
 
   const MessageContainer = styled.div`
     max-width: 600px;
+    border: 1px solid #ddd;
+    padding: 20px;
+
+    textarea {
+      width: 100%;
+      height: 100px;
+    }
+  `
+
+  const PreviewImage = styled.div`
+    height: 60px;
+    width: 60px;
+    border: 1px dashed black;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   `
 
   return (
-    <MessageContainer>
+    <div>
       <h2>Send a message to us</h2>
-        <textarea></textarea>
-        <input type="file" accept="image/*" onChange={handleImageUpload} multiple = "false" />
-        <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        ref={imageUploader}
-        style={{
-          display: "none"
-        }}
-      />
-      <div
-        style={{
-          height: "60px",
-          width: "60px",
-          border: "5px dashed black"
-        }}
-        onClick={() => imageUploader.current.click()}
-      >
-        <img
-          alt="preview"
-          ref={uploadedImage}
+      <MessageContainer>
+        <textarea placeholder="Your message..."></textarea>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          ref={imageUploader}
           style={{
-            width: "100%",
-            height: "100%",
+            display: "none"
           }}
         />
-      </div>
-      Click to upload Image
-    </div>
-    <button>Send message</button>
-  </MessageContainer>
+        <PreviewImage onClick={() => imageUploader.current.click()}>
+          <img
+            alt="preview"
+            ref={uploadedImage}
+          />
+        </PreviewImage>
+        Click to upload Image
+      <button>Send message</button>
+    </MessageContainer>
+  </div>
   );
 }
 
