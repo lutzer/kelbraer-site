@@ -21,8 +21,8 @@ export default function SketchPad(props) {
     // styled components
     const Button = styled.button`
         position: absolute;
-        top: 70px;
-        right:10px;
+        top: 62px;
+        right: 93px;
     }`;
 
     return (

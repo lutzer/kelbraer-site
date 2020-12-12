@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import SketchPad from './SketchPad';
 
 function Message() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
 
-  const [imageUploaded, setImageUploaded] = useState(true);
+  const [imageUploaded, setImageUploaded] = useState(false);
 
   // sketchpad
   const [sketch, setSketch] = useState("");
@@ -14,7 +14,7 @@ function Message() {
   const handleSketchUpload = () => setSketchIsOpen(true);
   
   const handleImageUpload = e => {
-    //setImageUploaded(true);
+    console.log(imageUploaded);
     const [file] = e.target.files;
     if (file) {
       const reader = new FileReader();
@@ -31,7 +31,7 @@ function Message() {
     imageUploader.current.value = ""
     const {current} = uploadedImage;
     current.src = "";
-    //setImageUploaded(false);
+    // setImageUploaded(false);
   }
 
   const handleSubmit = () => {
