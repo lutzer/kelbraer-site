@@ -1,20 +1,28 @@
 import { createGlobalStyle } from 'styled-components';
 import RubikRegular from './fonts/Rubik-Regular.ttf';
 import RubikBold from './fonts/Rubik-Bold.ttf';
+import RubikBlack from './fonts/Rubik-Black.ttf';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Rubik';
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     src: url(${RubikRegular}) format('truetype');
   }
 
   @font-face {
     font-family: 'Rubik';
     font-style: normal;
-    font-weight: bold;
+    font-weight: 700;
     src: url(${RubikBold}) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 900;
+    src: url(${RubikBlack}) format('truetype');
   }
 
 
@@ -43,6 +51,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: Rubik, sans-Serif;
     overflow: scroll;
     background-color: var(--bg);
+    line-height: 1.5;
   }
 
   h1 {
