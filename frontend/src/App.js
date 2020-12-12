@@ -3,6 +3,7 @@ import GlobalStyle from './GlobalStyle';
 // import SketchPad from './components/SketchPad';
 import Message from "./components/Message"
 import Intro from "./components/Intro"
+import Flower from "./components/Flower"
 
 const MessageContainer = styled.main`
   display: grid;
