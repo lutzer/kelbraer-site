@@ -17,17 +17,21 @@ const frag = glsl`
   uniform vec3 primary_color;
   uniform vec3 secondary_color;
   uniform vec3 background_color;
+  uniform float ratio;
   uniform float time;
   varying vec2 vUv;
 
   #pragma glslify: noise = require('glsl-noise/simplex/3d');
 
+  #define freq 0.2
+
   void main () {
 
-    float light = noise(vec3(time * 0.2, vUv.x * .9, 0.0)) * (1.0-sin(vUv.y) * 0.05) + vUv.y * 1.5;
+    float light = noise(vec3(time * freq, vUv.x * 3. - time * freq, vUv.y * time * 0.001)) * 0.08 + vUv.y * 0.92;
+    vec3 bg = mix(background_color, secondary_color, vUv.y);
 
     // vec3 color = 0.5 + 0.5 * cos(time + vUv.xyx + vec3(0.0, 2.0, 4.0));
-    gl_FragColor = vec4(mix(background_color, primary_color, step(0.5, light)), 1.0);
+    gl_FragColor = vec4(mix( bg, primary_color, step(ratio, light)), 1.0);
   }
 `;
 
@@ -45,7 +49,8 @@ const sketch = ({ gl }) => {
       time: ({ time }) => time,
       primary_color: rgbToVec3(37,34,29),
       secondary_color: rgbToVec3(244,168,17),
-      background_color: rgbToVec3(255,245,220)
+      background_color: rgbToVec3(255,245,220),
+      ratio: 0.6
     } 
   });
 };
