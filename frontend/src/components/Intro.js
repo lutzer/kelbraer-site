@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import {motion} from "framer-motion"
+import Success from "./Success.js";
 
 function Intro() {
 
@@ -11,11 +12,10 @@ function Intro() {
   `
 
   const Cloud = styled(motion.div)`
-    width: 200px;
-    height: 30px;
-    background-color: var(--red);
+    height: 200px;
+    background: url("./cloud.png") no-repeat;
+    margin-top: 0px;
   `
-
 
   return (
     <Container>
@@ -27,7 +27,8 @@ function Intro() {
           </textPath>
         </text>
       </svg>
-      <Cloud animate={{x: "120vw"}} transition={{ duration: 10 }}></Cloud>
+      <Cloud animate={{x: "120vw"}} transition={{ duration: 20, repeat: "Infinity" }}></Cloud>
+      <Success />
     </Container>
   );
 }
