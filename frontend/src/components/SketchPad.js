@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import SignaturePad from 'react-signature-canvas';
 import Popup from "reactjs-popup";
 import trimCanvas from "trim-canvas";
-import styled, { createGlobalStyle } from 'styled-components';
-import "./SketchPad.css";
-
+import styled from 'styled-components';
 
 export default function SketchPad(props) {
     // closing modal
@@ -19,19 +17,32 @@ export default function SketchPad(props) {
         props.setSketch(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")) & closeModal();
 
     // styled components
+    const Container = styled.div`
+
+    `
+
+
     const Button = styled.button`
+<<<<<<< HEAD
         position: absolute;
         top: 62px;
         right: 93px;
+=======
+>>>>>>> c37b513b0328f8a8f3af5f371afa10e5225a12ab
     }`;
 
+    const Buttons = styled.div`
+        width: 100%;
+    `
+
     return (
-        <div>
+        <Container>
             <Popup 
                 modal 
                 open={props.open}
                 closeOnDocumentClick onClose={closeModal}
             >
+                <Button onClick={closeModal}>X</Button>
                 <SignaturePad 
                     ref={sigCanvas}
                     canvasProps={{
@@ -39,10 +50,11 @@ export default function SketchPad(props) {
                         className: 'sigCanvas'
                     }}
                 />
-                <Button onClick={closeModal}>X</Button>
-                <button onClick={clear}>clear</button>
-                <button onClick={save}>save</button>
+                <Buttons>
+                    <button onClick={clear}>clear</button>
+                    <button onClick={save}>save</button>
+                </Buttons>
             </Popup>
-        </div>
+        </Container>
     );
 }

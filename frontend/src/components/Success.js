@@ -10,8 +10,9 @@ export default function Success() {
     > img {
         width: 100px;
         position: absolute;
-        margin-left: 40vw;
-    }
+        left: 47%;
+        top: 620px;
+        }
     `
 
     const Lip = styled(motion.div)`
@@ -28,7 +29,7 @@ export default function Success() {
     return (
         <Container>
             <img src="./envelope.png"/>
-            <Lip animate={{y: "-850px", x:"10vw"}} transition={{ duration:4, delay: 2}}></Lip>
+            <Lip animate={{y: "-950px", x:"10vw"}} transition={{ duration:4, repeat: "Infinity", repeatDelay: 20, delay: 2}}></Lip>
         </Container>
     )
 }
