@@ -5,6 +5,7 @@ import SketchPad from './SketchPad';
 function Message() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
+  const [ image, setImage ] = useState()
 
   const [imageUploaded, setImageUploaded] = useState(true);
 
@@ -14,24 +15,25 @@ function Message() {
   const handleSketchUpload = () => setSketchIsOpen(true);
   
   const handleImageUpload = e => {
-    //setImageUploaded(true);
+    setImageUploaded(true);
     const [file] = e.target.files;
     if (file) {
-      const reader = new FileReader();
-      const {current} = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-          current.src = e.target.result;
-      }
-      reader.readAsDataURL(file);
+      const imageUri = URL.createObjectURL(file)
+      setImage(imageUri)
+      // const reader = new FileReader();
+      // const {current} = uploadedImage;
+      // current.file = file;
+      // reader.onload = (e) => {
+      //     current.src = e.target.result;
+      // }
+      // reader.readAsDataURL(file);
     }
+    console.log(uploadedImage);
   };
 
   const clearImageInput = e => {
-    imageUploader.current.value = ""
-    const {current} = uploadedImage;
-    current.src = "";
-    //setImageUploaded(false);
+    setImage(undefined);
+    setImageUploaded(false);
   }
 
   const handleSubmit = () => {
@@ -120,10 +122,7 @@ function Message() {
               <path d="M9 9L24 24M24 9L9 24" stroke="white" stroke-width="2"/>
             </svg>
             </RemoveButton>
-            <img
-              alt="preview"
-              ref={uploadedImage}
-            />
+            { image && <img alt="preview" src={image}/>}
           </PreviewImage>
           {sketch ? (
             <PreviewImage visible={imageUploaded}>
