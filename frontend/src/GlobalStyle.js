@@ -27,6 +27,8 @@ const GlobalStyle = createGlobalStyle`
 
 
   :root {
+        --s5: 84px;
+        --s4: 63px;
         --s3: 47px;
         --s2: 36px;
         --s1: 27px;
