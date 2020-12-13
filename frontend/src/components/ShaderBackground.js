@@ -7,8 +7,8 @@ function rgbToVec3(r,g,b) { return [ r / 255, g / 255, b / 255 ] };
 const ShaderBackground = () => {
   
   const uniforms = {
-    ratio : {type: '1f', value: 0.5 }, // float
-    primary_color : { type: '3fv', value: rgbToVec3(37, 34, 2) },
+    ratio : {type: '1f', value: 0.2 }, // float
+    primary_color : { type: '3fv', value: rgbToVec3(37, 34, 29) },
     secondary_color : { type: '3fv', value: rgbToVec3(244,168,17) },
     background_color : {type: '3fv', value: rgbToVec3(255,245,220) }
   };
@@ -86,7 +86,7 @@ const ShaderBackground = () => {
 
       float time = iTime;
 
-      float light = simplex3d(vec3(time * freq, vUv.x * 3. - time * freq, vUv.y * time * 0.001)) * 0.08 + vUv.y * 0.92;
+      float light = simplex3d(vec3(time * freq, vUv.x * 3. - time * freq, vUv.y * time * 0.001)) * 0.2 + vUv.y * 0.92;
       vec3 bg = mix(background_color, secondary_color, vUv.y);
 
       // vec3 color = 0.5 + 0.5 * cos(time + vUv.xyx + vec3(0.0, 2.0, 4.0));

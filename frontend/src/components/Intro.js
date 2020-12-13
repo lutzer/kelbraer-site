@@ -29,6 +29,7 @@ function Intro() {
     visible: i => ({
       y: 150 - Math.random() * 300,
       x: 150 - Math.random() * 300,
+      rotate: 360,
       transition: {
         delay: i * 1,
         duration: 7,
@@ -50,14 +51,14 @@ function Intro() {
         <motion.div custom={1}
           animate="visible"
           variants={variants}>
-          <Flower></Flower>
+          <Flower fill="var(--white)"></Flower>
         </motion.div>
         <motion.div custom={2}
           animate="visible"
           variants={variants}><Flower fill="var(--orange)"></Flower></motion.div>
           <motion.div custom={3}
           animate="visible"
-          variants={variants}><Flower></Flower></motion.div>
+          variants={variants}><Flower  fill="var(--white)"></Flower></motion.div>
       </FlowerContainer>
       <svg viewBox="0 0 500 100">
         <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" fill="transparent"/>
